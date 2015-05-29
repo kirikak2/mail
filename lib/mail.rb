@@ -6,6 +6,7 @@ module Mail # :doc:
 
   require 'uri'
   require 'net/smtp'
+  require 'net/lmtp'
   require 'mime/types'
 
   if RUBY_VERSION <= '1.8.6'

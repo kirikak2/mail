@@ -31,6 +31,8 @@ module Mail
         Mail::SMTP
       when :smtp
         Mail::SMTP
+      when :lmtp
+        Mail::LMTP
       when :sendmail
         Mail::Sendmail
       when :exim

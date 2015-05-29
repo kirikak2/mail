@@ -2,6 +2,7 @@ require 'mail/network/retriever_methods/base'
 
 module Mail
   register_autoload :SMTP, 'mail/network/delivery_methods/smtp'
+  register_autoload :LMTP, 'mail/network/delivery_methods/lmtp'
   register_autoload :FileDelivery, 'mail/network/delivery_methods/file_delivery'
   register_autoload :Sendmail, 'mail/network/delivery_methods/sendmail'
   register_autoload :Exim, 'mail/network/delivery_methods/exim'
