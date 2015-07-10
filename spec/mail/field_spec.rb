@@ -60,6 +60,12 @@ describe Mail::Field do
       end
     end
 
+    it "should split the name and values out of the raw field passed in with :no_header_formatted option" do
+      field = Mail::Field.new('to: Bob', nil, 'utf-8', :no_header_formatted => true)
+      expect(field.name).to eq 'to'
+      expect(field.value).to eq 'Bob'
+    end
+
     it "should split the name and values out of the raw field passed in" do
       field = Mail::Field.new('To: Bob')
       expect(field.name).to eq 'To'

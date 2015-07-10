@@ -52,7 +52,7 @@ module Mail
     end
     
     def encoded
-      do_encode(CAPITALIZED_FIELD)
+      do_encode(name || CAPITALIZED_FIELD)
     end
     
     def decoded

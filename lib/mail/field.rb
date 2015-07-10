@@ -111,7 +111,8 @@ module Mail
     # parameters:
     #
     #  Field.new('content-type', ['text', 'plain', {:charset => 'UTF-8'}])
-    def initialize(name, value = nil, charset = 'utf-8')
+    def initialize(name, value = nil, charset = 'utf-8', options = {})
+      @options = options
       case
       when name.index(COLON)            # Field.new("field-name: field data")
         @charset = value.blank? ? charset : value
@@ -129,7 +130,10 @@ module Mail
         @raw_value = nil
         @charset = charset
       end
-      @name = FIELD_NAME_MAP[@name.to_s.downcase] || @name
+
+      unless @options[:no_header_formatted]
+        @name = FIELD_NAME_MAP[@name.to_s.downcase] || @name
+      end
     end
 
     def field=(value)
@@ -246,7 +250,11 @@ module Mail
     def new_field(name, value, charset)
       lower_case_name = name.to_s.downcase
       if field_klass = FIELDS_MAP[lower_case_name]
-        field_klass.new(value, charset)
+        field_obj = field_klass.new(value, charset)
+        if @options[:no_header_formatted]
+          field_obj.name = name
+        end
+        field_obj
       else
         OptionalField.new(name, value, charset)
       end

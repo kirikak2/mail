@@ -57,9 +57,9 @@ module Mail
  
     def encoded
       if value.blank?
-        "#{CAPITALIZED_FIELD}: \r\n"
+        "#{name || CAPITALIZED_FIELD}: \r\n"
       else
-        "#{CAPITALIZED_FIELD}: #{info}; #{formatted_date}\r\n"
+        "#{name || CAPITALIZED_FIELD}: #{info}; #{formatted_date}\r\n"
       end
     end
     

@@ -114,7 +114,7 @@ module Mail
       else
         p = ""
       end
-      "#{CAPITALIZED_FIELD}: #{content_type}#{p}\r\n"
+      "#{name || CAPITALIZED_FIELD}: #{content_type}#{p}\r\n"
     end
 
     def decoded

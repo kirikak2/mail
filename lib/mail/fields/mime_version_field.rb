@@ -42,7 +42,7 @@ module Mail
     end
     
     def encoded
-      "#{CAPITALIZED_FIELD}: #{version}\r\n"
+      "#{name || CAPITALIZED_FIELD}: #{version}\r\n"
     end
     
     def decoded

@@ -31,7 +31,7 @@ module Mail
 
     # TODO: Fix this up
     def encoded
-      "#{CAPITALIZED_FIELD}: #{location}\r\n"
+      "#{name || CAPITALIZED_FIELD}: #{location}\r\n"
     end
     
     def decoded

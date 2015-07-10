@@ -46,8 +46,8 @@ module Mail
   #  mail[:from] = 'bob@test.lindsaar.net'
   #  mail['subject'] = 'This is an email'
   #  mail.body = 'This is the body'
-  def self.new(*args, &block)
-    Message.new(args, &block)
+  def self.new(data = nil, options = {}, &block)
+    Message.new(data, options, &block)
   end
 
   # Sets the default delivery method and retriever method for all new Mail objects.

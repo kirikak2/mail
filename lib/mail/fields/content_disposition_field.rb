@@ -54,7 +54,7 @@ module Mail
       else
         p = "\r\n"
       end
-      "#{CAPITALIZED_FIELD}: #{disposition_type}" + p
+      "#{name || CAPITALIZED_FIELD}: #{disposition_type}" + p
     end
     
     def decoded

@@ -97,7 +97,7 @@ module Mail
     #
     #  mail.to_s #=> "From: mikel@test.lindsaar.net\r\nTo: you@...
     #
-    def initialize(*args, &block)
+    def initialize(data = nil, options = {}, &block)
       @body = nil
       @body_raw = nil
       @separate_parts = false
@@ -107,6 +107,7 @@ module Mail
       @header = nil
       @charset = self.class.default_charset
       @defaulted_charset = true
+      @options = options
 
       @smtp_envelope_from = nil
       @smtp_envelope_to = nil
@@ -122,10 +123,10 @@ module Mail
 
       @mark_for_delete = false
 
-      if args.flatten.first.respond_to?(:each_pair)
-        init_with_hash(args.flatten.first)
+      if data.respond_to?(:each_pair)
+        init_with_hash(data)
       else
-        init_with_string(args.flatten[0].to_s)
+        init_with_string(data.to_s)
       end
 
       if block_given?
@@ -134,6 +135,8 @@ module Mail
 
       self
     end
+
+    attr_reader :options
 
     # If you assign a delivery handler, mail will call :deliver_mail on the
     # object you assign to delivery_handler, it will pass itself as the
@@ -414,7 +417,7 @@ module Mail
     #  mail.header = 'To: mikel@test.lindsaar.net\r\nFrom: Bob@bob.com'
     #  mail.header #=> <#Mail::Header
     def header=(value)
-      @header = Mail::Header.new(value, charset)
+      @header = Mail::Header.new(value, charset, options)
     end
 
     # Returns the header object of the message object. Or, if passed
@@ -2086,7 +2089,7 @@ module Mail
       passed_in_options = IndifferentHash.new(hash)
       self.raw_source = ''
 
-      @header = Mail::Header.new
+      @header = Mail::Header.new(nil, nil, options)
       @body = Mail::Body.new
       @body_raw = nil
 

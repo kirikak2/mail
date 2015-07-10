@@ -47,11 +47,13 @@ module Mail
     # no automatic processing of that field will happen.  If you find one of
     # these cases, please make a patch and send it in, or at the least, send
     # me the example so we can fix it.
-    def initialize(header_text = nil, charset = nil)
+    def initialize(header_text = nil, charset = nil, options = {})
       @charset = charset
+      @options = options
       self.raw_source = header_text.to_crlf.lstrip
       split_header if header_text
     end
+    attr_reader :options
 
     def initialize_copy(original)
       super
@@ -67,7 +69,7 @@ module Mail
     # Returns an array of all the fields in the header in order that they
     # were read in.
     def fields
-      @fields ||= FieldList.new
+      @fields ||= FieldList.new.set_options(options)
     end
     
     #  3.6. Field definitions
@@ -90,11 +92,11 @@ module Mail
     #  h = Header.new
     #  h.fields = ['From: mikel@me.com', 'To: bob@you.com']
     def fields=(unfolded_fields)
-      @fields = Mail::FieldList.new
+      @fields = Mail::FieldList.new.set_options(options)
       warn "Warning: more than #{self.class.maximum_amount} header fields only using the first #{self.class.maximum_amount}" if unfolded_fields.length > self.class.maximum_amount
       unfolded_fields[0..(self.class.maximum_amount-1)].each do |field|
 
-        field = Field.new(field, nil, charset)
+        field = Field.new(field, nil, charset, options)
         if limited_field?(field.name) && (selected = select_field_for(field.name)) && selected.any? 
           selected.first.update(field.name, field.value)
         else

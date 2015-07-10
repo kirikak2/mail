@@ -8,6 +8,11 @@ module Mail
 
     include Enumerable
 
+    def set_options(options)
+      @options = options
+      self
+    end
+
     # Insert the field in sorted order.
     #
     # Heavily based on bisect.insort from Python, which is:
@@ -15,19 +20,23 @@ module Mail
     #   Licensed under <http://docs.python.org/license.html>
     #   From <http://hg.python.org/cpython/file/2.7/Lib/bisect.py>
     def <<( new_field )
-      lo = 0
-      hi = size
+      if defined?(@options) && @options && @options[:no_header_formatted]
+        super
+      else
+        lo = 0
+        hi = size
 
-      while lo < hi
-        mid = (lo + hi).div(2)
-        if new_field < self[mid]
-          hi = mid
-        else
-          lo = mid + 1
+        while lo < hi
+          mid = (lo + hi).div(2)
+          if new_field < self[mid]
+            hi = mid
+          else
+            lo = mid + 1
+          end
         end
-      end
 
-      insert(lo, new_field)
+        insert(lo, new_field)
+      end
     end
   end
 end

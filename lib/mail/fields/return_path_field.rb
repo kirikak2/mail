@@ -46,7 +46,7 @@ module Mail
     end
     
     def encoded
-      "#{CAPITALIZED_FIELD}: <#{address}>\r\n"
+      "#{name || CAPITALIZED_FIELD}: <#{address}>\r\n"
     end
     
     def decoded
