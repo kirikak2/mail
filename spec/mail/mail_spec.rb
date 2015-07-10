@@ -30,5 +30,4 @@ describe "mail" do
     file_method = Mail.new(File.open(fixture('emails', 'plain_emails', 'raw_email.eml'), 'rb', &:read)).to_s
     expect(wrap_method).to eq file_method
   end
-
 end

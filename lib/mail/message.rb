@@ -1813,7 +1813,7 @@ module Mail
     # all headers, attachments, etc.  This is an encoded email in US-ASCII,
     # so it is able to be directly sent to an email server.
     def encoded
-      ready_to_send!
+      ready_to_send! unless options[:no_header_formatted]
       buffer = header.encoded
       buffer << "\r\n"
       buffer << body.encoded(content_transfer_encoding)

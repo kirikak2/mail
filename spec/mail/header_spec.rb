@@ -383,10 +383,16 @@ describe Mail::Header do
       expect(header.fields.length).to eq 1
     end
 
-    it "should not capitalize header name with :no_header_formatted" do
+    it "should not capitalize header name(cc) with :no_header_formatted" do
       header = Mail::Header.new("cc: Mikel <test2@lindsaar.net>\r\n", 'utf-8', no_header_formatted: true)
       expect(header["cc"].encoded).to eq "cc: Mikel <test2@lindsaar.net>\r\n"
     end
+
+    it "should not capitalize header name(content-transfer-encoding) with :no_header_formatted" do
+      header = Mail::Header.new("cONTENT-tRANSFER-eNCODING: 7BIT\r\n", 'utf-8', no_header_formatted: true)
+      expect(header["content-transfer-encoding"].encoded).to eq "cONTENT-tRANSFER-eNCODING: 7bit\r\n"
+    end
+
     
     # Handle empty X-Optional header from Microsoft Exchange
     it "should handle an empty X-* header value" do

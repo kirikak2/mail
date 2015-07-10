@@ -52,10 +52,6 @@ module Mail
 
     end
     
-    def name
-      'Message-ID'
-    end
-    
     def message_ids
       [message_id]
     end
