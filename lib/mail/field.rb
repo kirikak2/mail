@@ -171,6 +171,7 @@ module Mail
     end
 
     def update(name, value)
+      @changed = true
       @field = create_field(name, value, @charset)
     end
 
