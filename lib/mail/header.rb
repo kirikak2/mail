@@ -178,7 +178,7 @@ module Mail
       # User wants to create the field
       else
         # Need to insert in correct order for trace fields
-        self.fields << Field.new(name.to_s, value, charset)
+        self.fields << Field.new(name.to_s, value, charset, options)
       end
       if dasherize(fn) == "content-type"
         # Update charset if specified in Content-Type
