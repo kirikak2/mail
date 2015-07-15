@@ -1794,14 +1794,16 @@ module Mail
 
     # Encodes the message, calls encode on all its parts, gets an email message
     # ready to send
-    def ready_to_send!
+    def ready_to_send!(no_header_formatted = false)
       identify_and_set_transfer_encoding
-      parts.sort!([ "text/plain", "text/enriched", "text/html", "multipart/alternative" ])
-      parts.each do |part|
-        part.transport_encoding = transport_encoding
-        part.ready_to_send!
+      unless no_header_formatted
+        parts.sort!([ "text/plain", "text/enriched", "text/html", "multipart/alternative" ])
+        parts.each do |part|
+          part.transport_encoding = transport_encoding
+          part.ready_to_send!
+        end
+        add_required_fields
       end
-      add_required_fields
     end
 
     def encode!
@@ -1813,7 +1815,7 @@ module Mail
     # all headers, attachments, etc.  This is an encoded email in US-ASCII,
     # so it is able to be directly sent to an email server.
     def encoded
-      ready_to_send! unless options[:no_header_formatted]
+      ready_to_send!(options[:no_header_formatted])
       buffer = header.encoded
       buffer << "\r\n"
       buffer << body.encoded(content_transfer_encoding)
