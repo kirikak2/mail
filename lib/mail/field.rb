@@ -113,6 +113,7 @@ module Mail
     #  Field.new('content-type', ['text', 'plain', {:charset => 'UTF-8'}])
     def initialize(name, value = nil, charset = 'utf-8', options = {})
       @options = options
+      @changed = false
       case
       when name.index(COLON)            # Field.new("field-name: field data")
         @charset = value.blank? ? charset : value
@@ -137,6 +138,7 @@ module Mail
     end
 
     def field=(value)
+      @changed = true
       @field = value
     end
 
@@ -154,6 +156,7 @@ module Mail
     end
 
     def value=(val)
+      @changed = true
       @field = create_field(name, val, @charset)
     end
 
@@ -189,6 +192,19 @@ module Mail
       @field_order_id ||= (FIELD_ORDER_LOOKUP[self.name.to_s.downcase] || 100)
     end
 
+    def encoded
+      if @options[:no_header_formatted]
+        encoded_value = field.encoded
+        if encoded_value.blank? || changed?
+          encoded_value
+        else
+          "#{@raw_value}\r\n"
+        end
+      else
+        field.encoded
+      end
+    end
+
     def method_missing(name, *args, &block)
       field.send(name, *args, &block)
     end
@@ -215,6 +231,10 @@ module Mail
     FIELD_ORDER_LOOKUP = Hash[FIELD_ORDER.each_with_index.to_a]
 
     private
+
+    def changed?
+      @changed
+    end
 
     def split(raw_field)
       match_data = raw_field.mb_chars.match(FIELD_SPLIT)

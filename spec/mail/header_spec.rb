@@ -390,7 +390,7 @@ describe Mail::Header do
 
     it "should not capitalize header name(content-transfer-encoding) with :no_header_formatted" do
       header = Mail::Header.new("cONTENT-tRANSFER-eNCODING: 7BIT\r\n", 'utf-8', no_header_formatted: true)
-      expect(header["content-transfer-encoding"].encoded).to eq "cONTENT-tRANSFER-eNCODING: 7bit\r\n"
+      expect(header["content-transfer-encoding"].encoded).to eq "cONTENT-tRANSFER-eNCODING: 7BIT\r\n"
     end
 
     
