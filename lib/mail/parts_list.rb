@@ -20,8 +20,8 @@ module Mail
       @parts.to_yaml(options)
     end
 
-    def attachments
-      Mail::AttachmentsList.new(@parts)
+    def attachments(body_attachment = nil)
+      Mail::AttachmentsList.new(body_attachment, @parts)
     end
 
     def collect

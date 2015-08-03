@@ -338,3 +338,14 @@ describe "attachment order" do
     expect(mail2.attachments[3].filename).to eq 'test.jpg'
   end
 end
+
+describe "attachment only eml" do
+  subject{ Mail.read(fixture('emails', 'attachment_emails', 'attachment_only_email.eml')) }
+  it{ expect(subject.attachments.length).to eq(1) }
+  it{ expect(subject.attachments[0].filename).to eq("blah.gz") }
+  it{ expect(subject.attachments[0].decoded).not_to be_nil }
+  it{ subject.body = "test"
+      expect(subject.parts.length).to eq(2)
+      expect(subject.attachments.length).to eq(1)
+      expect(subject.parts[0].body).to eq("test") }
+end
