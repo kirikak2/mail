@@ -1,11 +1,13 @@
 module Mail
   class AttachmentsList < Array
 
-    def initialize(parts_list)
+    def initialize(body_attachment = nil, parts_list)
       @parts_list = parts_list
       @content_disposition_type = 'attachment'
-      parts_list.map { |p|
-        if p.content_type == "message/rfc822"
+      [body_attachment].concat(parts_list).map { |p|
+        if p.nil?
+          nil
+        elsif p.content_type == "message/rfc822"
           Mail.new(p.body).attachments
         elsif p.parts.empty?
           p if p.attachment?
