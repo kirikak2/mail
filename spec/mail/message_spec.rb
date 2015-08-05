@@ -558,7 +558,7 @@ describe Mail::Message do
           content_type  'text/plain; charset=UTF-8'
           content_transfer_encoding '7bit'
           content_description       'This is a test'
-          content_disposition       'attachment; filename=File'
+          # content_disposition       'attachment; filename=File'
           content_id                '<1234@message_id.lindsaar.net>'
           mime_version  '1.0'
           body          'This is a body of text'
@@ -588,7 +588,7 @@ describe Mail::Message do
         expect(message.content_type).to              eq 'text/plain; charset=UTF-8'
         expect(message.content_transfer_encoding).to eq '7bit'
         expect(message.content_description).to       eq 'This is a test'
-        expect(message.content_disposition).to       eq 'attachment; filename=File'
+        # expect(message.content_disposition).to       eq 'attachment; filename=File'
         expect(message.content_id).to                eq '<1234@message_id.lindsaar.net>'
         expect(message.mime_version).to              eq '1.0'
         expect(message.body.to_s).to          eq 'This is a body of text'
@@ -620,7 +620,7 @@ describe Mail::Message do
         message.content_type =  'text/plain; charset=UTF-8'
         message.content_transfer_encoding = '7bit'
         message.content_description =       'This is a test'
-        message.content_disposition =       'attachment; filename=File'
+        # message.content_disposition =       'attachment; filename=File'
         message.content_id =                '<1234@message_id.lindsaar.net>'
         message.mime_version =  '1.0'
         message.body =          'This is a body of text'
@@ -649,7 +649,7 @@ describe Mail::Message do
         expect(message.content_type).to              eq 'text/plain; charset=UTF-8'
         expect(message.content_transfer_encoding).to eq '7bit'
         expect(message.content_description).to       eq 'This is a test'
-        expect(message.content_disposition).to       eq 'attachment; filename=File'
+        # expect(message.content_disposition).to       eq 'attachment; filename=File'
         expect(message.content_id).to                eq '<1234@message_id.lindsaar.net>'
         expect(message.mime_version).to              eq '1.0'
         expect(message.body.to_s).to          eq 'This is a body of text'
@@ -681,7 +681,7 @@ describe Mail::Message do
         message[:content_type] =  'text/plain; charset=UTF-8'
         message[:content_transfer_encoding] = '7bit'
         message[:content_description] =       'This is a test'
-        message[:content_disposition] =       'attachment; filename=File'
+        # message[:content_disposition] =       'attachment; filename=File'
         message[:content_id] =                '<1234@message_id.lindsaar.net>'
         message[:mime_version]=  '1.0'
         message[:body] =          'This is a body of text'
@@ -710,7 +710,7 @@ describe Mail::Message do
         expect(message.content_type).to              eq 'text/plain; charset=UTF-8'
         expect(message.content_transfer_encoding).to eq '7bit'
         expect(message.content_description).to       eq 'This is a test'
-        expect(message.content_disposition).to       eq 'attachment; filename=File'
+        # expect(message.content_disposition).to       eq 'attachment; filename=File'
         expect(message.content_id).to                eq '<1234@message_id.lindsaar.net>'
         expect(message.mime_version).to              eq '1.0'
         expect(message.body.to_s).to          eq 'This is a body of text'
@@ -742,7 +742,7 @@ describe Mail::Message do
         message['content_type'] =  'text/plain; charset=UTF-8'
         message['content_transfer_encoding'] = '7bit'
         message['content_description'] =       'This is a test'
-        message['content_disposition'] =       'attachment; filename=File'
+        # message['content_disposition'] =       'attachment; filename=File'
         message['content_id'] =                '<1234@message_id.lindsaar.net>'
         message['mime_version'] =  '1.0'
         message['body'] =          'This is a body of text'
@@ -771,7 +771,7 @@ describe Mail::Message do
         expect(message.content_type).to              eq 'text/plain; charset=UTF-8'
         expect(message.content_transfer_encoding).to eq '7bit'
         expect(message.content_description).to       eq 'This is a test'
-        expect(message.content_disposition).to       eq 'attachment; filename=File'
+        # expect(message.content_disposition).to       eq 'attachment; filename=File'
         expect(message.content_id).to                eq '<1234@message_id.lindsaar.net>'
         expect(message.mime_version).to              eq '1.0'
         expect(message.body.to_s).to          eq 'This is a body of text'
@@ -803,7 +803,7 @@ describe Mail::Message do
           :content_type =>  'text/plain; charset=UTF-8',
           :content_transfer_encoding => '7bit',
           :content_description =>       'This is a test',
-          :content_disposition =>       'attachment; filename=File',
+          # :content_disposition =>       'attachment; filename=File',
           :content_id =>                '<1234@message_id.lindsaar.net>',
           :mime_version =>  '1.0',
           :body =>          'This is a body of text'
@@ -833,7 +833,7 @@ describe Mail::Message do
         expect(message.content_type).to              eq 'text/plain; charset=UTF-8'
         expect(message.content_transfer_encoding).to eq '7bit'
         expect(message.content_description).to       eq 'This is a test'
-        expect(message.content_disposition).to       eq 'attachment; filename=File'
+        # expect(message.content_disposition).to       eq 'attachment; filename=File'
         expect(message.content_id).to                eq '<1234@message_id.lindsaar.net>'
         expect(message.mime_version).to              eq '1.0'
         expect(message.body.to_s).to          eq 'This is a body of text'
@@ -865,7 +865,7 @@ describe Mail::Message do
           'content_type' =>  'text/plain; charset=UTF-8',
           'content_transfer_encoding' => '7bit',
           'content_description' =>       'This is a test',
-          'content_disposition' =>       'attachment; filename=File',
+          # 'content_disposition' =>       'attachment; filename=File',
           'content_id' =>                '<1234@message_id.lindsaar.net>',
           'mime_version' =>  '1.0',
           'body' =>          'This is a body of text'
@@ -895,7 +895,7 @@ describe Mail::Message do
         expect(message.content_type).to              eq 'text/plain; charset=UTF-8'
         expect(message.content_transfer_encoding).to eq '7bit'
         expect(message.content_description).to       eq 'This is a test'
-        expect(message.content_disposition).to       eq 'attachment; filename=File'
+        # expect(message.content_disposition).to       eq 'attachment; filename=File'
         expect(message.content_id).to                eq '<1234@message_id.lindsaar.net>'
         expect(message.mime_version).to              eq '1.0'
         expect(message.body.to_s).to          eq 'This is a body of text'
