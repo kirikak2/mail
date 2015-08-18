@@ -1229,6 +1229,14 @@ module Mail
       body_lazy(value)
     end
 
+    def rewrite_body(value, encoding = 'UTF-8')
+      body_lazy(value)
+      body.charset = encoding
+      @defaulted_charset = false
+      header[:content_type].instance_eval{ @changed = true }
+      self.add_charset
+    end
+
     # Returns the body of the message object. Or, if passed
     # a parameter sets the value.
     #

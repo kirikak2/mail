@@ -30,4 +30,20 @@ describe "mail" do
     file_method = Mail.new(File.open(fixture('emails', 'plain_emails', 'raw_email.eml'), 'rb', &:read)).to_s
     expect(wrap_method).to eq file_method
   end
+
+  context "when multicharset mail" do
+    before do
+      @mail = Mail.new(File.read(fixture('emails', 'multi_charset', 'japanese_iso_2022.eml')).to_s, :no_header_formatted => true)
+    end
+
+    it{ expect(@mail.to_s).to be_include("charset=iso-2022-jp") }
+
+    context "when rewrite body" do
+      before do
+        @mail.rewrite_body("書き換えテスト")
+      end
+
+      it{ expect(@mail.to_s).to be_include("charset=UTF-8") }
+    end
+  end
 end
