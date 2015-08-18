@@ -1230,7 +1230,7 @@ module Mail
     end
 
     def rewrite_body(value, encoding = 'UTF-8')
-      body_lazy(value)
+      body_lazy(value.encode(encoding))
       body.charset = encoding
       @defaulted_charset = false
       header[:content_type].instance_eval{ @changed = true }
