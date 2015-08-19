@@ -1830,7 +1830,7 @@ module Mail
       ready_to_send!(options[:no_header_formatted])
       buffer = header.encoded
       buffer << "\r\n"
-      buffer << body.encoded(content_transfer_encoding)
+      buffer << body.encoded(content_transfer_encoding, options[:no_header_formatted])
       buffer
     end
 
