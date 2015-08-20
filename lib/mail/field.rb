@@ -196,7 +196,7 @@ module Mail
     def encoded
       if @options[:no_header_formatted]
         encoded_value = field.encoded
-        if encoded_value.blank? || changed?
+        if encoded_value.blank? || changed? || @raw_value.nil?
           encoded_value
         else
           "#{@raw_value}\r\n"
