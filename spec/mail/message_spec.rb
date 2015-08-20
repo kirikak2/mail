@@ -2037,4 +2037,13 @@ describe Mail::Message do
     end
   end
 
+  describe "rewrite body" do
+    subject{ Mail.new(File.read(fixture('emails', 'multi_charset', 'japanese.eml'))) }
+
+    it "should rewrite body" do
+      subject.rewrite_body("add")
+      expect{ subject.to_s }.not_to raise_error
+      expect( subject.body.to_s ).to eq("add")
+    end
+  end
 end

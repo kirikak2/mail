@@ -1229,9 +1229,15 @@ module Mail
       body_lazy(value)
     end
 
-    def rewrite_body(value, encoding = 'UTF-8')
-      body_lazy(value.encode(encoding))
-      body.charset = encoding
+    def rewrite_body(value, transfer_encoding = '8bit')
+      be = body.get_best_encoding(transfer_encoding)
+      enc = Mail::Encodings::get_encoding(be)
+      if defined?(Encoding) && body.charset && charset != "US-ASCII"
+        value = value.encode(body.charset)
+        value.force_encoding('BINARY') unless Encoding.find(charset).ascii_compatible?
+      end
+
+      body_lazy(enc.encode(value))
       @defaulted_charset = false
       header[:content_type].instance_eval{ @changed = true }
       self.add_charset
