@@ -1233,7 +1233,7 @@ module Mail
       be = body.get_best_encoding(transfer_encoding)
       enc = Mail::Encodings::get_encoding(be)
       if defined?(Encoding) && body.charset && charset != "US-ASCII"
-        value = value.encode(body.charset)
+        value = value.encode(charset)
         value.force_encoding('BINARY') unless Encoding.find(charset).ascii_compatible?
       end
 
