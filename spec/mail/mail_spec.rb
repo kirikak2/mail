@@ -43,7 +43,7 @@ describe "mail" do
         @mail.rewrite_body("書き換えテスト")
       end
 
-      it{ expect(@mail.to_s).to be_include("charset=UTF-8") }
+      it{ expect(@mail.to_s).to be_include("charset=iso-2022-jp") }
     end
   end
 end

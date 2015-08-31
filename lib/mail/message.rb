@@ -1240,7 +1240,6 @@ module Mail
       body_lazy(enc.encode(value))
       @defaulted_charset = false
       header[:content_type].instance_eval{ @changed = true }
-      self.add_charset
     end
 
     # Returns the body of the message object. Or, if passed
